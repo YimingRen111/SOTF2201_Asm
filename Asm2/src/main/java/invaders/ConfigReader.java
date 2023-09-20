@@ -29,14 +29,11 @@ public class ConfigReader {
 
 			// reading the Game section:
 			JSONObject jsonGame = (JSONObject) jsonObject.get("Game");
-
 			// reading a coordinate from the nested section within the game
 			// note that the game x and y are of type Long (i.e. they are integers)
 			Long gameX = (Long) ((JSONObject) jsonGame.get("size")).get("x");
-			// TODO: Long gameY =
+			Long gameY = (Long) ((JSONObject) jsonGame.get("size")).get("y");
 
-			// TODO: delete me, this is just a demonstration:
-			System.out.println("Game details: x: " + gameX);
 
 			// reading the "Enemies" array:
 			JSONArray jsonEnemies = (JSONArray) jsonObject.get("Enemies");
@@ -44,15 +41,30 @@ public class ConfigReader {
 			// reading from the array:
 			for (Object obj : jsonEnemies) {
 				JSONObject jsonEnemy = (JSONObject) obj;
-				
-				// the enemy position is a double
 				Double positionX = (Double) ((JSONObject) jsonEnemy.get("position")).get("x");
-				// TODO: Double positionY =
+				Double positionY = (Double) ((JSONObject) jsonEnemy.get("position")).get("y");
+				String projectileStrategy = (String) jsonEnemy.get("projectile");
+			}
 
-				String projectileStrategy = (Double) jsonEnemy.get("projectile");
+			// Reading the Player section:
+			JSONObject jsonPlayer = (JSONObject) jsonObject.get("Player");
+			String playerColor = (String) jsonPlayer.get("colour");
+			Long playerSpeed = (Long) jsonPlayer.get("speed");
+			Long playerLives = (Long) jsonPlayer.get("lives");
+			JSONObject playerPosition = (JSONObject) jsonPlayer.get("position");
+			Double playerPosX = (Double) playerPosition.get("x");
+			Double playerPosY = (Double) playerPosition.get("y");
 
-				// TODO: delete me, this is just a demonstration:
-				System.out.println("Enemey x: " + positionX + ", projectile: " + projectileStrategy);
+			// Reading the Bunkers array:
+			JSONArray jsonBunkers = (JSONArray) jsonObject.get("Bunkers");
+			for (Object obj : jsonBunkers) {
+				JSONObject jsonBunker = (JSONObject) obj;
+				JSONObject bunkerPosition = (JSONObject) jsonBunker.get("position");
+				Double bunkerPosX = (Double) bunkerPosition.get("x");
+				Double bunkerPosY = (Double) bunkerPosition.get("y");
+				JSONObject bunkerSize = (JSONObject) jsonBunker.get("size");
+				Long bunkerSizeX = (Long) bunkerSize.get("x");
+				Long bunkerSizeY = (Long) bunkerSize.get("y");
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
