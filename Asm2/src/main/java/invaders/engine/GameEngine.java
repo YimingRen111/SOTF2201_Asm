@@ -2,9 +2,13 @@ package invaders.engine;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import invaders.ConfigReader;
 import invaders.GameObject;
 import invaders.entities.Bullet;
+import invaders.entities.Bunker;
+import invaders.entities.Enemy;
 import invaders.entities.Player;
 import invaders.physics.Moveable;
 import invaders.physics.Vector2D;
@@ -15,20 +19,36 @@ import invaders.rendering.Renderable;
  */
 public class GameEngine {
 
+	private ConfigReader config;
 	private List<GameObject> gameobjects;
 	private List<Renderable> renderables;
 	private Player player;
+	private List<Enemy> enemies;
+	private List<Bunker> bunkers;
 
 	private boolean left;
 	private boolean right;
 
-	public GameEngine(String config){
+	public GameEngine(ConfigReader config){
 		// read the config here
+		this.config = config;
 		gameobjects = new ArrayList<GameObject>();
 		renderables = new ArrayList<Renderable>();
 
-		player = new Player(new Vector2D(200, 380));
+		// Initialize player
+		player = config.getPlayer();
+		gameobjects.add(player);
 		renderables.add(player);
+
+		// Initialize enemies
+		enemies = config.getEnemies();
+		gameobjects.addAll(enemies);
+		renderables.addAll(enemies);
+
+		// Initialize bunkers
+		bunkers = config.getBunkers();
+		gameobjects.addAll(bunkers);
+		renderables.addAll(bunkers);
 	}
 
 	/**

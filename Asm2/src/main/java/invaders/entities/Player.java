@@ -15,7 +15,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player implements Moveable, Damagable, Renderable {
+public class Player implements GameObject, Moveable, Damagable, Renderable {
 
     private String colour;
     private int speed;
@@ -27,7 +27,7 @@ public class Player implements Moveable, Damagable, Renderable {
 
     private final double width = 25;
     private final double height = 30;
-    private final Image image;
+    private Image image = null;
 
     private List<Bullet> bullets = new ArrayList<>();
 
@@ -38,6 +38,11 @@ public class Player implements Moveable, Damagable, Renderable {
         this.posX = posX;
         this.posY = posY;
         this.image = new Image(new File("src/main/resources/player.png").toURI().toString(), width, height, true, true);
+    }
+
+    public Player(Vector2D vector2D) {
+        this.posX = Integer.parseInt(String.valueOf(vector2D.getX()));
+        this.posY = Integer.parseInt(String.valueOf(vector2D.getY()));
     }
 
     @Override
@@ -110,4 +115,13 @@ public class Player implements Moveable, Damagable, Renderable {
         return Layer.FOREGROUND;
     }
 
+    @Override
+    public void start() {
+
+    }
+
+    @Override
+    public void update() {
+
+    }
 }

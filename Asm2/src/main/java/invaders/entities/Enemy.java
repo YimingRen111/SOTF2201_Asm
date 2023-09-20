@@ -12,7 +12,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Enemy implements Moveable, Renderable {
+public class Enemy implements GameObject, Moveable, Renderable {
     private int posX;
     private int posY;
     private String Strategy;
@@ -79,4 +79,13 @@ public class Enemy implements Moveable, Renderable {
         return null;
     }
 
+    @Override
+    public void start() {
+
+    }
+
+    @Override
+    public void update() {
+
+    }
 }
