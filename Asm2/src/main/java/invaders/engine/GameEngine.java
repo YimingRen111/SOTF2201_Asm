@@ -71,7 +71,7 @@ public class GameEngine {
 			if(!ro.getLayer().equals(Renderable.Layer.FOREGROUND)){
 				continue;
 			}
-			if(ro.getPosition().getX() + ro.getWidth() >= 640) {
+			if(ro.getPosition().getX() + ro.getWidth() >= 600) {
 				ro.getPosition().setX(639-ro.getWidth());
 			}
 
@@ -79,7 +79,7 @@ public class GameEngine {
 				ro.getPosition().setX(1);
 			}
 
-			if(ro.getPosition().getY() + ro.getHeight() >= 400) {
+			if(ro.getPosition().getY() + ro.getHeight() > 800) {
 				ro.getPosition().setY(399-ro.getHeight());
 			}
 
@@ -87,6 +87,7 @@ public class GameEngine {
 				ro.getPosition().setY(1);
 			}
 		}
+
 	}
 
 	public List<Renderable> getRenderables(){

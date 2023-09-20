@@ -93,7 +93,6 @@ public class Player implements GameObject, Moveable, Damagable, Renderable {
         Vector2D bulletPosition = new Vector2D(bulletStartX, bulletStartY);
         bullet = BulletFactory.createBullet("fast_straight", bulletPosition, Bullet.Direction.UP);
         bullets.add(bullet);
-        System.out.println(bullet.getPosition().getY());
         return bullet;
     }
 
