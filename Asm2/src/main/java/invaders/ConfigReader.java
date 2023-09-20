@@ -58,7 +58,7 @@ public class ConfigReader {
 		JSONObject position = (JSONObject) playerConfig.get("position");
 		int posX = ((Long) position.get("x")).intValue();
 		int posY = ((Long) position.get("y")).intValue();
-		return new Player(colour, speed, lives, posX, posY);
+		return new Player(colour, speed, lives, posX, posY, getGameWidth());
 	}
 
 	public List<Bunker> getBunkers() {

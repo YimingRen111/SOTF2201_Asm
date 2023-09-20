@@ -47,9 +47,11 @@ class KeyboardInputHandler {
 
         if (keyEvent.getCode().equals(KeyCode.LEFT)) {
             left = true;
+//            System.out.println("Left key pressed!");
         }
         if (keyEvent.getCode().equals(KeyCode.RIGHT)) {
             right = true;
+//            System.out.println("Right key pressed!");
         }
 
         if (left) {

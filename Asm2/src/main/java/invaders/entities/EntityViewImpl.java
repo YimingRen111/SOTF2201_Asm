@@ -47,11 +47,14 @@ public class EntityViewImpl implements EntityView {
         if (!node.getImage().equals(entity.getImage())) {
             node.setImage(entity.getImage());
         }
-        node.setX(position.getX() - xViewportOffset);
-        node.setY(position.getY() - yViewportOffset);
+        node.setX(entity.getPosition().getX() - xViewportOffset); // Use entity's position
+        node.setY(entity.getPosition().getY() - yViewportOffset); // Use entity's position
+//        node.setFitHeight(entity.getHeight());
+//        node.setFitWidth(entity.getWidth());
         node.setPreserveRatio(true);
         delete = false;
     }
+
 
     @Override
     public boolean matchesEntity(Renderable entity) {

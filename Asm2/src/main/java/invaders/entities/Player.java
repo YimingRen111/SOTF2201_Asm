@@ -1,5 +1,6 @@
 package invaders.entities;
 
+import invaders.ConfigReader;
 import invaders.GameObject;
 import invaders.engine.GameEngine;
 import invaders.entities.Factory.BulletFactory;
@@ -17,6 +18,8 @@ import java.util.List;
 
 public class Player implements GameObject, Moveable, Damagable, Renderable {
 
+    private ConfigReader configReader;
+
     private String colour;
     private int speed;
     private int lives;
@@ -27,22 +30,19 @@ public class Player implements GameObject, Moveable, Damagable, Renderable {
 
     private final double width = 25;
     private final double height = 30;
+    private double gameWidth;
     private Image image = null;
 
     private List<Bullet> bullets = new ArrayList<>();
 
-    public Player(String colour, int speed, int lives, int posX, int posY) {
+    public Player(String colour, int speed, int lives, int posX, int posY, double gameWidth) {
         this.colour = colour;
         this.speed = speed;
         this.lives = lives;
         this.posX = posX;
         this.posY = posY;
+        this.gameWidth = gameWidth;
         this.image = new Image(new File("src/main/resources/player.png").toURI().toString(), width, height, true, true);
-    }
-
-    public Player(Vector2D vector2D) {
-        this.posX = Integer.parseInt(String.valueOf(vector2D.getX()));
-        this.posY = Integer.parseInt(String.valueOf(vector2D.getY()));
     }
 
     @Override
@@ -73,12 +73,19 @@ public class Player implements GameObject, Moveable, Damagable, Renderable {
     @Override
     public void left() {
         this.posX -= 1;
+        if (posX < 0) {
+            posX = 0;
+        }
     }
 
     @Override
     public void right() {
-        this.posY += 1;
+        this.posX += 1;
+        if (posX + 1.5*width > gameWidth) {
+            posX = (int) (gameWidth - 1.5*width);
+        }
     }
+
 
     public void shoot(){
         Vector2D bulletPosition = new Vector2D(posX, posY - this.height);
@@ -115,6 +122,22 @@ public class Player implements GameObject, Moveable, Damagable, Renderable {
         return Layer.FOREGROUND;
     }
 
+//    public void setMovingLeft(boolean movingLeft) {
+//        this.movingLeft = movingLeft;
+//    }
+//
+//    public void setMovingRight(boolean movingRight) {
+//        this.movingRight = movingRight;
+//    }
+//
+//    public boolean isMovingLeft() {
+//        return movingLeft;
+//    }
+//
+//    public boolean isMovingRight() {
+//        return movingRight;
+//    }
+
     @Override
     public void start() {
 
@@ -122,6 +145,6 @@ public class Player implements GameObject, Moveable, Damagable, Renderable {
 
     @Override
     public void update() {
-
+//       setPosition(position);
     }
 }
