@@ -17,7 +17,11 @@ import java.util.List;
 
 public class Player implements Moveable, Damagable, Renderable {
 
-    private final Vector2D position;
+    private String colour;
+    private int speed;
+    private int lives;
+    private int posX;
+    private int posY;
     private final Animator anim = null;
     private double health = 100;
 
@@ -27,10 +31,13 @@ public class Player implements Moveable, Damagable, Renderable {
 
     private List<Bullet> bullets = new ArrayList<>();
 
-
-    public Player(Vector2D position){
+    public Player(String colour, int speed, int lives, int posX, int posY) {
+        this.colour = colour;
+        this.speed = speed;
+        this.lives = lives;
+        this.posX = posX;
+        this.posY = posY;
         this.image = new Image(new File("src/main/resources/player.png").toURI().toString(), width, height, true, true);
-        this.position = position;
     }
 
     @Override
@@ -60,16 +67,16 @@ public class Player implements Moveable, Damagable, Renderable {
 
     @Override
     public void left() {
-        this.position.setX(this.position.getX() - 1);
+        this.posX -= 1;
     }
 
     @Override
     public void right() {
-        this.position.setX(this.position.getX() + 1);
+        this.posY += 1;
     }
 
     public void shoot(){
-        Vector2D bulletPosition = new Vector2D(this.position.getX(), this.position.getY() - this.height);
+        Vector2D bulletPosition = new Vector2D(posX, posY - this.height);
         Bullet bullet = BulletFactory.createBullet("fast_straight", bulletPosition, Bullet.Direction.UP);
         bullets.add(bullet);
     }
@@ -95,7 +102,7 @@ public class Player implements Moveable, Damagable, Renderable {
 
     @Override
     public Vector2D getPosition() {
-        return position;
+        return new Vector2D(posX, posY);
     }
 
     @Override

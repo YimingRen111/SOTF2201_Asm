@@ -13,17 +13,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Enemy implements Moveable, Renderable {
-    private Vector2D position;
+    private int posX;
+    private int posY;
+    private String Strategy;
+
     private Image image;
     private List<Bullet> bullets = new ArrayList<>();
 
-    public Enemy(Vector2D position) {
-        this.position = position;
+
+    public Enemy(int posX, int posY, String projectileStrategy) {
+        this.posX = posX;
+        this.posY = posY;
         this.image = new Image(new File("src/main/resources/enemy.png").toURI().toString());
+        this.Strategy = projectileStrategy;
     }
 
     public void shoot() {
-        Vector2D bulletPosition = new Vector2D(this.position.getX(), this.position.getY() + this.getHeight());
+        Vector2D bulletPosition = new Vector2D(posX, posY + this.getHeight());
         Bullet bullet = BulletFactory.createBullet("fast_straight", bulletPosition, Bullet.Direction.DOWN);
         bullets.add(bullet);
     }

@@ -1,97 +1,86 @@
 package invaders;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
+import invaders.entities.Bunker;
+import invaders.entities.Enemy;
+import invaders.entities.Player;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class ConfigReader {
 
-	/**
-	 * You will probably not want to use a static method/class for this.
-	 * 
-	 * This is just an example of how to access different parts of the json
-	 * 
-	 * @param path The path of the json file to read
-	 */
-	public static void parse(String path) {
+	private JSONObject configData;
 
+	public ConfigReader(String configFilePath) {
+		loadConfig(configFilePath);
+	}
+
+	private void loadConfig(String configFilePath) {
 		JSONParser parser = new JSONParser();
 		try {
-			Object object = parser.parse(new FileReader(path));
-
-			// convert Object to JSONObject
-			JSONObject jsonObject = (JSONObject) object;
-
-			// reading the Game section:
-			JSONObject jsonGame = (JSONObject) jsonObject.get("Game");
-			// reading a coordinate from the nested section within the game
-			// note that the game x and y are of type Long (i.e. they are integers)
-			Long gameX = (Long) ((JSONObject) jsonGame.get("size")).get("x");
-			Long gameY = (Long) ((JSONObject) jsonGame.get("size")).get("y");
-
-
-			// reading the "Enemies" array:
-			JSONArray jsonEnemies = (JSONArray) jsonObject.get("Enemies");
-
-			// reading from the array:
-			for (Object obj : jsonEnemies) {
-				JSONObject jsonEnemy = (JSONObject) obj;
-				Double positionX = (Double) ((JSONObject) jsonEnemy.get("position")).get("x");
-				Double positionY = (Double) ((JSONObject) jsonEnemy.get("position")).get("y");
-				String projectileStrategy = (String) jsonEnemy.get("projectile");
-			}
-
-			// Reading the Player section:
-			JSONObject jsonPlayer = (JSONObject) jsonObject.get("Player");
-			String playerColor = (String) jsonPlayer.get("colour");
-			Long playerSpeed = (Long) jsonPlayer.get("speed");
-			Long playerLives = (Long) jsonPlayer.get("lives");
-			JSONObject playerPosition = (JSONObject) jsonPlayer.get("position");
-			Double playerPosX = (Double) playerPosition.get("x");
-			Double playerPosY = (Double) playerPosition.get("y");
-
-			// Reading the Bunkers array:
-			JSONArray jsonBunkers = (JSONArray) jsonObject.get("Bunkers");
-			for (Object obj : jsonBunkers) {
-				JSONObject jsonBunker = (JSONObject) obj;
-				JSONObject bunkerPosition = (JSONObject) jsonBunker.get("position");
-				Double bunkerPosX = (Double) bunkerPosition.get("x");
-				Double bunkerPosY = (Double) bunkerPosition.get("y");
-				JSONObject bunkerSize = (JSONObject) jsonBunker.get("size");
-				Long bunkerSizeX = (Long) bunkerSize.get("x");
-				Long bunkerSizeY = (Long) bunkerSize.get("y");
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ParseException e) {
+			Object obj = parser.parse(new FileReader(configFilePath));
+			configData = (JSONObject) obj;
+		} catch (IOException | ParseException e) {
 			e.printStackTrace();
 		}
 	}
 
-	/**
-	 * Your main method will probably be in another file!
-	 * 
-	 * @param args First argument is the path to the config file
-	 */
-	public static void main(String[] args) {
-		// if a command line argument is provided, that should be used as the path
-		// if not, you can hard-code a default. e.g. "src/main/resources/config.json"
-		// this makes it easier to test your program with different config files
-		String configPath;
-		if (args.length > 0) {
-			configPath = args[0];
-		} else {
-			configPath = "src/main/resources/config.json";
-		}
-		// parse the file:
-		ConfigReader.parse(configPath);
+	public int getGameWidth() {
+		JSONObject gameConfig = (JSONObject) configData.get("Game");
+		JSONObject size = (JSONObject) gameConfig.get("size");
+		return ((Long) size.get("x")).intValue();
 	}
 
+	public int getGameHeight() {
+		JSONObject gameConfig = (JSONObject) configData.get("Game");
+		JSONObject size = (JSONObject) gameConfig.get("size");
+		return ((Long) size.get("y")).intValue();
+	}
+
+	public Player getPlayer() {
+		JSONObject playerConfig = (JSONObject) configData.get("Player");
+		String colour = (String) playerConfig.get("colour");
+		int speed = ((Long) playerConfig.get("speed")).intValue();
+		int lives = ((Long) playerConfig.get("lives")).intValue();
+		JSONObject position = (JSONObject) playerConfig.get("position");
+		int posX = ((Long) position.get("x")).intValue();
+		int posY = ((Long) position.get("y")).intValue();
+		return new Player(colour, speed, lives, posX, posY);
+	}
+
+	public List<Bunker> getBunkers() {
+		JSONArray bunkersArray = (JSONArray) configData.get("Bunkers");
+		List<Bunker> bunkersList = new ArrayList<>();
+		for (Object bunkerObj : bunkersArray) {
+			JSONObject bunkerConfig = (JSONObject) bunkerObj;
+			JSONObject position = (JSONObject) bunkerConfig.get("position");
+			int posX = ((Long) position.get("x")).intValue();
+			int posY = ((Long) position.get("y")).intValue();
+			JSONObject size = (JSONObject) bunkerConfig.get("size");
+			int width = ((Long) size.get("x")).intValue();
+			int height = ((Long) size.get("y")).intValue();
+			bunkersList.add(new Bunker(posX, posY, width, height));
+		}
+		return bunkersList;
+	}
+
+	public List<Enemy> getEnemies() {
+		JSONArray enemiesArray = (JSONArray) configData.get("Enemies");
+		List<Enemy> enemiesList = new ArrayList<>();
+		for (Object enemyObj : enemiesArray) {
+			JSONObject enemyConfig = (JSONObject) enemyObj;
+			JSONObject position = (JSONObject) enemyConfig.get("position");
+			int posX = ((Long) position.get("x")).intValue();
+			int posY = ((Long) position.get("y")).intValue();
+			String projectileStrategy = (String) enemyConfig.get("projectile");
+			enemiesList.add(new Enemy(posX, posY, projectileStrategy));
+		}
+		return enemiesList;
+	}
 }
