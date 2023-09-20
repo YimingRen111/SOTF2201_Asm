@@ -1,5 +1,8 @@
 package invaders.entities;
 
+import invaders.GameObject;
+import invaders.engine.GameEngine;
+import invaders.entities.Factory.BulletFactory;
 import invaders.logic.Damagable;
 import invaders.physics.Moveable;
 import invaders.physics.Vector2D;
@@ -9,6 +12,8 @@ import invaders.rendering.Renderable;
 import javafx.scene.image.Image;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Player implements Moveable, Damagable, Renderable {
 
@@ -19,6 +24,9 @@ public class Player implements Moveable, Damagable, Renderable {
     private final double width = 25;
     private final double height = 30;
     private final Image image;
+
+    private List<Bullet> bullets = new ArrayList<>();
+
 
     public Player(Vector2D position){
         this.image = new Image(new File("src/main/resources/player.png").toURI().toString(), width, height, true, true);
@@ -61,7 +69,13 @@ public class Player implements Moveable, Damagable, Renderable {
     }
 
     public void shoot(){
-        // todo
+        Vector2D bulletPosition = new Vector2D(this.position.getX(), this.position.getY() - this.height);
+        Bullet bullet = BulletFactory.createBullet("fast_straight", bulletPosition, Bullet.Direction.UP);
+        bullets.add(bullet);
+    }
+
+    public List<Bullet> getBullets() {
+        return bullets;
     }
 
     @Override

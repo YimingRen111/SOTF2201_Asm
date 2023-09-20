@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import invaders.GameObject;
+import invaders.entities.Bullet;
 import invaders.entities.Player;
 import invaders.physics.Moveable;
 import invaders.physics.Vector2D;
@@ -35,6 +36,7 @@ public class GameEngine {
 	 */
 	public void update(){
 		movePlayer();
+		moveBullets();
 		for(GameObject go: gameobjects){
 			go.update();
 		}
@@ -95,5 +97,16 @@ public class GameEngine {
 		if(right){
 			player.right();
 		}
+	}
+
+	private void moveBullets() {
+		List<Bullet> bullets = player.getBullets();
+		for (Bullet bullet : bullets) {
+			bullet.up();
+		}
+	}
+
+	public Player getPlayer() {
+		return player;
 	}
 }
