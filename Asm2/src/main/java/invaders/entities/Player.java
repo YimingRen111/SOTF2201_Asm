@@ -32,7 +32,7 @@ public class Player implements GameObject, Moveable, Damagable, Renderable {
     private final double height = 30;
     private double gameWidth;
     private Image image = null;
-
+    private Bullet bullet;
     private List<Bullet> bullets = new ArrayList<>();
 
     public Player(String colour, int speed, int lives, int posX, int posY, double gameWidth) {
@@ -87,11 +87,17 @@ public class Player implements GameObject, Moveable, Damagable, Renderable {
     }
 
 
-    public void shoot(){
-        Vector2D bulletPosition = new Vector2D(posX, posY - this.height);
-        Bullet bullet = BulletFactory.createBullet("fast_straight", bulletPosition, Bullet.Direction.UP);
+    public Bullet shoot(){
+        double bulletStartX = posX + (width / 2); // Center of the player
+        double bulletStartY = posY; // Top of the player
+        Vector2D bulletPosition = new Vector2D(bulletStartX, bulletStartY);
+        bullet = BulletFactory.createBullet("fast_straight", bulletPosition, Bullet.Direction.UP);
         bullets.add(bullet);
+        System.out.println(bullet.getPosition().getY());
+        return bullet;
     }
+
+
 
     public List<Bullet> getBullets() {
         return bullets;
@@ -122,21 +128,6 @@ public class Player implements GameObject, Moveable, Damagable, Renderable {
         return Layer.FOREGROUND;
     }
 
-//    public void setMovingLeft(boolean movingLeft) {
-//        this.movingLeft = movingLeft;
-//    }
-//
-//    public void setMovingRight(boolean movingRight) {
-//        this.movingRight = movingRight;
-//    }
-//
-//    public boolean isMovingLeft() {
-//        return movingLeft;
-//    }
-//
-//    public boolean isMovingRight() {
-//        return movingRight;
-//    }
 
     @Override
     public void start() {
@@ -145,6 +136,5 @@ public class Player implements GameObject, Moveable, Damagable, Renderable {
 
     @Override
     public void update() {
-//       setPosition(position);
     }
 }

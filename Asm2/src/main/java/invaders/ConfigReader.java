@@ -1,5 +1,6 @@
 package invaders;
 
+import invaders.entities.Bullet;
 import invaders.entities.Bunker;
 import invaders.entities.Enemy;
 import invaders.entities.Player;

@@ -49,8 +49,6 @@ public class EntityViewImpl implements EntityView {
         }
         node.setX(entity.getPosition().getX() - xViewportOffset); // Use entity's position
         node.setY(entity.getPosition().getY() - yViewportOffset); // Use entity's position
-//        node.setFitHeight(entity.getHeight());
-//        node.setFitWidth(entity.getWidth());
         node.setPreserveRatio(true);
         delete = false;
     }

@@ -25,9 +25,11 @@ public class GameEngine {
 	private Player player;
 	private List<Enemy> enemies;
 	private List<Bunker> bunkers;
+	private List<Bullet> bullets = new ArrayList<>();
 
 	private boolean left;
 	private boolean right;
+	private boolean shoot;
 
 	public GameEngine(ConfigReader config){
 		// read the config here
@@ -49,6 +51,7 @@ public class GameEngine {
 		bunkers = config.getBunkers();
 		gameobjects.addAll(bunkers);
 		renderables.addAll(bunkers);
+
 	}
 
 	/**
@@ -60,7 +63,9 @@ public class GameEngine {
 		for(GameObject go: gameobjects){
 			go.update();
 		}
-
+		for (Bullet bullet : bullets) {
+			bullet.up();
+		}
 		// ensure that renderable foreground objects don't go off-screen
 		for(Renderable ro: renderables){
 			if(!ro.getLayer().equals(Renderable.Layer.FOREGROUND)){
@@ -105,7 +110,7 @@ public class GameEngine {
 	}
 
 	public boolean shootPressed(){
-		player.shoot();
+		shoot = true;
 		return true;
 	}
 
@@ -120,10 +125,14 @@ public class GameEngine {
 	}
 
 	private void moveBullets() {
-		List<Bullet> bullets = player.getBullets();
-		for (Bullet bullet : bullets) {
-			bullet.up();
+		if(shoot){
+			Bullet bullet = player.shoot();
+			bullets.add(bullet);
+			gameobjects.add(bullet);
+			renderables.add(bullet);  // Add bullet to renderables
+			shoot = false;
 		}
+
 	}
 
 	public Player getPlayer() {
