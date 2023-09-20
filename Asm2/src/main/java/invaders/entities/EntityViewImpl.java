@@ -1,5 +1,6 @@
 package invaders.entities;
 
+import invaders.ConfigReader;
 import invaders.physics.Vector2D;
 import invaders.rendering.Renderable;
 import javafx.scene.Node;
@@ -16,6 +17,19 @@ public class EntityViewImpl implements EntityView {
         this.position = entity.getPosition();
         node = new ImageView(entity.getImage());
         node.setViewOrder(getViewOrder(entity.getLayer()));
+
+        // Adjust the size based on the type of entity
+        if (entity instanceof Player) {
+            node.setFitWidth(ConfigReader.PLAYER_WIDTH);
+            node.setFitHeight(ConfigReader.PLAYER_HEIGHT);
+        } else if (entity instanceof Enemy) {
+            node.setFitWidth(ConfigReader.ENEMY_WIDTH);
+            node.setFitHeight(ConfigReader.ENEMY_HEIGHT);
+        } else if (entity instanceof Bunker) {
+            node.setFitWidth(ConfigReader.BUNKER_WIDTH);
+            node.setFitHeight(ConfigReader.BUNKER_HEIGHT);
+        }
+
         update(0.0, 0.0);
     }
 
@@ -35,8 +49,6 @@ public class EntityViewImpl implements EntityView {
         }
         node.setX(position.getX() - xViewportOffset);
         node.setY(position.getY() - yViewportOffset);
-        node.setFitHeight(entity.getHeight());
-        node.setFitWidth(entity.getWidth());
         node.setPreserveRatio(true);
         delete = false;
     }

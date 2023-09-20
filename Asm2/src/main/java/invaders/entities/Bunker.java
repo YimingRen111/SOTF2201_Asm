@@ -6,8 +6,46 @@ import invaders.physics.Vector2D;
 import invaders.rendering.Renderable;
 import javafx.scene.image.Image;
 
+import java.io.File;
+
 public class Bunker implements GameObject, Damagable, Renderable {
+    private int posX;
+    private int posY;
+    private int width;
+    private int height;
+    private Image image = new Image(new File("src/main/resources/bunker.png").toURI().toString());
+
     public Bunker(int posX, int posY, int width, int height) {
+        this.posX = posX;
+        this.posY = posY;
+        this.width = width;
+        this.height = height;
+    }
+
+
+    @Override
+    public Image getImage() {
+        return this.image;
+    }
+
+    @Override
+    public double getWidth() {
+        return this.image.getWidth();
+    }
+
+    @Override
+    public double getHeight() {
+        return this.image.getHeight();
+    }
+
+    @Override
+    public Vector2D getPosition() {
+        return new Vector2D(this.posX, this.posY);
+    }
+
+    @Override
+    public Layer getLayer() {
+        return Layer.FOREGROUND;
     }
 
     @Override
@@ -33,30 +71,5 @@ public class Bunker implements GameObject, Damagable, Renderable {
     @Override
     public boolean isAlive() {
         return false;
-    }
-
-    @Override
-    public Image getImage() {
-        return null;
-    }
-
-    @Override
-    public double getWidth() {
-        return 0;
-    }
-
-    @Override
-    public double getHeight() {
-        return 0;
-    }
-
-    @Override
-    public Vector2D getPosition() {
-        return null;
-    }
-
-    @Override
-    public Layer getLayer() {
-        return null;
     }
 }

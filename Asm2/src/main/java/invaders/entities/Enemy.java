@@ -56,27 +56,27 @@ public class Enemy implements GameObject, Moveable, Renderable {
 
     @Override
     public Image getImage() {
-        return null;
+        return this.image;
     }
 
     @Override
     public double getWidth() {
-        return 0;
+        return this.image.getWidth();
     }
 
     @Override
     public double getHeight() {
-        return 0;
+        return this.image.getHeight();
     }
 
     @Override
     public Vector2D getPosition() {
-        return null;
+        return new Vector2D(this.posX, this.posY);
     }
 
     @Override
     public Layer getLayer() {
-        return null;
+        return Layer.FOREGROUND;
     }
 
     @Override

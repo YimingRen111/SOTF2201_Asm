@@ -15,6 +15,13 @@ import java.util.List;
 
 public class ConfigReader {
 
+	public static final double PLAYER_WIDTH = 50;
+	public static final double PLAYER_HEIGHT = 50;
+	public static final double ENEMY_WIDTH = 40;
+	public static final double ENEMY_HEIGHT = 40;
+	public static final double BUNKER_WIDTH = 60;
+	public static final double BUNKER_HEIGHT = 30;
+
 	private JSONObject configData;
 
 	public ConfigReader(String configFilePath) {
