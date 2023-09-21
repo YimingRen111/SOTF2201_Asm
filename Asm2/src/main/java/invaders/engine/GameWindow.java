@@ -56,6 +56,18 @@ public class GameWindow {
         model.update();
 
         List<Renderable> renderables = model.getRenderables();
+
+        // Check if each EntityView in entityViews still has its corresponding Renderable in renderables
+        List<EntityView> viewsToRemove = new ArrayList<>();
+        for (EntityView view : entityViews) {
+            if (!renderables.contains(view.getEntity())) {
+                viewsToRemove.add(view);
+                pane.getChildren().remove(view.getNode());
+            }
+        }
+        entityViews.removeAll(viewsToRemove);
+
+        // Continue to check for new Renderable objects and create new EntityViews for them
         for (Renderable entity : renderables) {
             boolean notFound = true;
             for (EntityView view : entityViews) {
@@ -71,13 +83,6 @@ public class GameWindow {
                 pane.getChildren().add(entityView.getNode());
             }
         }
-
-        for (EntityView entityView : entityViews) {
-            if (entityView.isMarkedForDelete()) {
-                pane.getChildren().remove(entityView.getNode());
-            }
-        }
-        entityViews.removeIf(EntityView::isMarkedForDelete);
     }
 
 	public Scene getScene() {

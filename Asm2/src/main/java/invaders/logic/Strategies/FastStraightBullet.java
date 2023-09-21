@@ -9,6 +9,6 @@ public class FastStraightBullet implements BulletStrategy{
     @Override
     public void move(Vector2D position) {
         // Fast movement logic
-        position.setY(position.getY() - 4);
+        position.setY(position.getY() - 5);
     }
 }

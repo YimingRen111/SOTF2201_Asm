@@ -12,7 +12,7 @@ import javafx.scene.image.ImageView;
 
 import java.io.File;
 
-public class Bullet implements Renderable, GameObject {
+public class Bullet extends Entity implements Renderable, GameObject {
     private Vector2D position;
     private BulletStrategy strategy;
     private int damage;
@@ -31,14 +31,6 @@ public class Bullet implements Renderable, GameObject {
     @Override
     public void update() {
 
-    }
-
-    public double getSpeed() {
-        return speed;
-    }
-
-    public enum Direction {
-        UP, DOWN
     }
 
     public Bullet(Vector2D position, int damage, Direction direction, BulletStrategy strategy) {
@@ -74,10 +66,6 @@ public class Bullet implements Renderable, GameObject {
         return Layer.FOREGROUND;
     }
 
-    public void setPosition(Vector2D position) {
-        this.position = position;
-    }
-
     public int getDamage() {
         return damage;
     }
@@ -96,6 +84,10 @@ public class Bullet implements Renderable, GameObject {
 
     public void down() {
         strategy.move(position);
+    }
+
+    public enum Direction {
+        UP, DOWN
     }
 
 }

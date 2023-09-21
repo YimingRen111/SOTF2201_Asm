@@ -6,10 +6,7 @@ import java.util.Map;
 
 import invaders.ConfigReader;
 import invaders.GameObject;
-import invaders.entities.Bullet;
-import invaders.entities.Bunker;
-import invaders.entities.Enemy;
-import invaders.entities.Player;
+import invaders.entities.*;
 import invaders.physics.Moveable;
 import invaders.physics.Vector2D;
 import invaders.rendering.Renderable;
@@ -67,27 +64,37 @@ public class GameEngine {
 			bullet.up();
 		}
 		// ensure that renderable foreground objects don't go off-screen
-		for(Renderable ro: renderables){
-			if(!ro.getLayer().equals(Renderable.Layer.FOREGROUND)){
+		for(Renderable ro: renderables) {
+			if (!ro.getLayer().equals(Renderable.Layer.FOREGROUND)) {
 				continue;
 			}
-			if(ro.getPosition().getX() + ro.getWidth() >= 600) {
-				ro.getPosition().setX(639-ro.getWidth());
+			if (ro.getPosition().getX() + ro.getWidth() >= 600) {
+				ro.getPosition().setX(639 - ro.getWidth());
 			}
 
-			if(ro.getPosition().getX() <= 0) {
+			if (ro.getPosition().getX() <= 0) {
 				ro.getPosition().setX(1);
 			}
 
-			if(ro.getPosition().getY() + ro.getHeight() > 800) {
-				ro.getPosition().setY(399-ro.getHeight());
+			if (ro.getPosition().getY() + ro.getHeight() > 800) {
+				ro.getPosition().setY(399 - ro.getHeight());
 			}
 
-			if(ro.getPosition().getY() <= 0) {
+			if (ro.getPosition().getY() <= 0) {
 				ro.getPosition().setY(1);
 			}
 		}
-
+		// Check bullets for out of bounds
+		List<Bullet> bulletsToRemove = new ArrayList<>();
+		for (Bullet bullet : bullets) {
+			if (bullet.getPosition().getY() <= 5 || bullet.getPosition().getY() > 800) {
+				bulletsToRemove.add(bullet);
+				bullet.markForDelete();
+			}
+		}
+		bullets.removeAll(bulletsToRemove);
+		gameobjects.removeAll(bulletsToRemove);
+		renderables.removeAll(bulletsToRemove);
 	}
 
 	public List<Renderable> getRenderables(){
@@ -139,4 +146,5 @@ public class GameEngine {
 	public Player getPlayer() {
 		return player;
 	}
+
 }

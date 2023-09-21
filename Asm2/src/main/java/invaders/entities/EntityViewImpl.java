@@ -42,6 +42,11 @@ public class EntityViewImpl implements EntityView {
         }
     }
 
+    public Renderable getEntity() {
+        return this.entity;
+    }
+
+
     @Override
     public void update(double xViewportOffset, double yViewportOffset) {
         if (!node.getImage().equals(entity.getImage())) {
