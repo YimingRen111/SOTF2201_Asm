@@ -132,8 +132,6 @@ public class GameEngine {
 			go.update();
 		}
 
-
-
 		handleCollisions();
 
 
@@ -212,9 +210,11 @@ public class GameEngine {
 	private void moveBullets() {
 		if(shoot){
 			Bullet bullet = player.shoot();
-			bullets.add(bullet);
-			gameobjects.add(bullet);
-			renderables.add(bullet);  // Add bullet to renderables
+			if (bullet != null) {  // Check if bullet is not null
+				bullets.add(bullet);
+				gameobjects.add(bullet);
+				renderables.add(bullet);  // Add bullet to renderables
+			}
 			shoot = false;
 		}
 

@@ -10,6 +10,7 @@ public abstract class Entity implements Renderable {
     // ... other common properties and methods ...
 
     public void markForDelete() {
+
         this.markedForDelete = true;
     }
 

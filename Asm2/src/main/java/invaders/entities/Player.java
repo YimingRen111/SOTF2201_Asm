@@ -17,7 +17,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player implements GameObject, Moveable, Damagable, Renderable {
+public class Player extends Entity implements GameObject, Moveable, Damagable, Renderable {
 
     private ConfigReader configReader;
 
@@ -35,6 +35,8 @@ public class Player implements GameObject, Moveable, Damagable, Renderable {
     private Image image = null;
     private Bullet bullet;
     private List<Bullet> bullets = new ArrayList<>();
+    private boolean bulletInPlay = false;
+
 
     public Player(String colour, int speed, int lives, int posX, int posY, double gameWidth) {
         this.colour = colour;
@@ -92,9 +94,12 @@ public class Player implements GameObject, Moveable, Damagable, Renderable {
         double bulletStartX = posX + (width / 2); // Center of the player
         double bulletStartY = posY; // Top of the player
         Vector2D bulletPosition = new Vector2D(bulletStartX, bulletStartY);
-        bullet = BulletFactory.createBullet("slow_straight", bulletPosition, Bullet.Direction.UP);
-        bullets.add(bullet);
-        return bullet;
+
+        if (bullet == null || bullet.isMarkedForDelete()) {
+            bullet = BulletFactory.createBullet("slow_straight", bulletPosition, Bullet.Direction.UP);
+            return bullet;
+        }
+        return null; // if can't shoot, then return null.
     }
 
 

@@ -28,7 +28,7 @@ public class Enemy extends Entity implements GameObject, Moveable, Renderable {
 
     private boolean moveRight;
     private static final double MOVE_AMOUNT = 0.2; // distance for each movement
-    private static final double DOWN_AMOUNT = 5; // When reach the edge, move down
+    private static final double DOWN_AMOUNT = 4; // When reach the edge, move down
 
 
     public Enemy(int posX, int posY, String projectileStrategy) {
