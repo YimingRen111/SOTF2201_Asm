@@ -92,7 +92,7 @@ public class Player implements GameObject, Moveable, Damagable, Renderable {
         double bulletStartX = posX + (width / 2); // Center of the player
         double bulletStartY = posY; // Top of the player
         Vector2D bulletPosition = new Vector2D(bulletStartX, bulletStartY);
-        bullet = BulletFactory.createBullet("fast_straight", bulletPosition, Bullet.Direction.UP);
+        bullet = BulletFactory.createBullet("slow_straight", bulletPosition, Bullet.Direction.UP);
         bullets.add(bullet);
         return bullet;
     }

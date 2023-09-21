@@ -22,8 +22,8 @@ public class Bullet extends Entity implements Renderable, GameObject {
     private boolean isAlive = true;
     private Direction direction;
     private Image image;
-    private final double width = 5;
-    private final double height = 10;
+    private final double width = 60;
+    private final double height = 41;
     private BoxCollider collider;
 
     @Override

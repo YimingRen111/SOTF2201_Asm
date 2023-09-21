@@ -18,7 +18,7 @@
     {
       "position": {
         "x": 100,
-        "y": 700
+        "y": 600
       },
       "size": {
         "x": 100,
@@ -28,7 +28,7 @@
     {
       "position": {
         "x": 300,
-        "y": 700
+        "y": 600
       },
       "size": {
         "x": 150,
@@ -38,7 +38,7 @@
     {
       "position": {
         "x": 500,
-        "y": 700
+        "y": 600
       },
       "size": {
         "x": 100,
@@ -113,63 +113,126 @@
     {
       "position": {
         "x": 100,
-        "y": 100
+        "y": 150
       },
       "projectile": "fast_straight"
     },
     {
       "position": {
         "x": 150,
-        "y": 100
+        "y": 150
       },
       "projectile": "slow_straight"
     },
     {
       "position": {
         "x": 200,
-        "y": 100
+        "y": 150
       },
       "projectile": "slow_straight"
     },
     {
       "position": {
         "x": 250,
-        "y": 100
+        "y": 150
       },
       "projectile": "fast_straight"
     },
     {
       "position": {
         "x": 300,
-        "y": 100
+        "y": 150
       },
       "projectile": "slow_straight"
     },
     {
       "position": {
         "x": 350,
-        "y": 100
+        "y": 150
       },
       "projectile": "slow_straight"
     },
     {
       "position": {
         "x": 400,
-        "y": 100
+        "y": 150
       },
       "projectile": "slow_straight"
     },
     {
       "position": {
         "x": 450,
-        "y": 100
+        "y": 150
       },
       "projectile": "fast_straight"
     },
     {
       "position": {
         "x": 500,
-        "y": 100
+        "y": 150
+      },
+      "projectile": "slow_straight"
+    },
+    {
+      "position": {
+        "x": 100,
+        "y": 200
+      },
+      "projectile": "fast_straight"
+    },
+    {
+      "position": {
+        "x": 150,
+        "y": 200
+      },
+      "projectile": "slow_straight"
+    },
+    {
+      "position": {
+        "x": 200,
+        "y": 200
+      },
+      "projectile": "slow_straight"
+    },
+    {
+      "position": {
+        "x": 250,
+        "y": 200
+      },
+      "projectile": "fast_straight"
+    },
+    {
+      "position": {
+        "x": 300,
+        "y": 200
+      },
+      "projectile": "slow_straight"
+    },
+    {
+      "position": {
+        "x": 350,
+        "y": 200
+      },
+      "projectile": "slow_straight"
+    },
+    {
+      "position": {
+        "x": 400,
+        "y": 200
+      },
+      "projectile": "slow_straight"
+    },
+    {
+      "position": {
+        "x": 450,
+        "y": 200
+      },
+      "projectile": "fast_straight"
+    },
+    {
+      "position": {
+        "x": 500,
+        "y": 200
       },
       "projectile": "slow_straight"
     }

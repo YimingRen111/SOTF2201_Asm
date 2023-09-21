@@ -18,10 +18,10 @@ public class ConfigReader {
 
 	public static final double PLAYER_WIDTH = 50;
 	public static final double PLAYER_HEIGHT = 50;
-	public static final double ENEMY_WIDTH = 40;
-	public static final double ENEMY_HEIGHT = 40;
-	public static final double BUNKER_WIDTH = 60;
-	public static final double BUNKER_HEIGHT = 30;
+	public static final double ENEMY_WIDTH = 50;
+	public static final double ENEMY_HEIGHT = 37;
+	public static final double BUNKER_WIDTH = 80;
+	public static final double BUNKER_HEIGHT = 60;
 
 	private JSONObject configData;
 
