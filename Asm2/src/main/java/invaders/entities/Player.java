@@ -5,6 +5,7 @@ import invaders.GameObject;
 import invaders.engine.GameEngine;
 import invaders.entities.Factory.BulletFactory;
 import invaders.logic.Damagable;
+import invaders.physics.Collider;
 import invaders.physics.Moveable;
 import invaders.physics.Vector2D;
 import invaders.rendering.Animator;
@@ -127,6 +128,11 @@ public class Player implements GameObject, Moveable, Damagable, Renderable {
         return Layer.FOREGROUND;
     }
 
+
+    @Override
+    public Collider getCollider() {
+        return null;
+    }
 
     @Override
     public void start() {

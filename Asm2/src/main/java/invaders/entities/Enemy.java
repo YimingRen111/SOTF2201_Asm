@@ -2,6 +2,8 @@ package invaders.entities;
 
 import invaders.GameObject;
 import invaders.entities.Factory.BulletFactory;
+import invaders.physics.BoxCollider;
+import invaders.physics.Collider;
 import invaders.physics.Moveable;
 import invaders.physics.Vector2D;
 import invaders.rendering.Renderable;
@@ -12,13 +14,16 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Enemy implements GameObject, Moveable, Renderable {
+public class Enemy extends Entity implements GameObject, Moveable, Renderable {
     private int posX;
     private int posY;
     private String Strategy;
 
     private Image image;
     private List<Bullet> bullets = new ArrayList<>();
+    private BoxCollider collider;
+    private final double width = 40;
+    private final double height = 40;
 
 
     public Enemy(int posX, int posY, String projectileStrategy) {
@@ -26,6 +31,7 @@ public class Enemy implements GameObject, Moveable, Renderable {
         this.posY = posY;
         this.image = new Image(new File("src/main/resources/enemy.png").toURI().toString());
         this.Strategy = projectileStrategy;
+        this.collider = new BoxCollider(width, height, new Vector2D(posX,posY));
     }
 
     public void shoot() {
@@ -77,6 +83,11 @@ public class Enemy implements GameObject, Moveable, Renderable {
     @Override
     public Layer getLayer() {
         return Layer.FOREGROUND;
+    }
+
+    @Override
+    public Collider getCollider() {
+        return collider;
     }
 
     @Override

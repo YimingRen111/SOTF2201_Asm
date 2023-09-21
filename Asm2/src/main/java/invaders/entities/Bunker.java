@@ -2,6 +2,7 @@ package invaders.entities;
 
 import invaders.GameObject;
 import invaders.logic.Damagable;
+import invaders.physics.Collider;
 import invaders.physics.Vector2D;
 import invaders.rendering.Renderable;
 import javafx.scene.image.Image;
@@ -46,6 +47,11 @@ public class Bunker implements GameObject, Damagable, Renderable {
     @Override
     public Layer getLayer() {
         return Layer.FOREGROUND;
+    }
+
+    @Override
+    public Collider getCollider() {
+        return null;
     }
 
     @Override

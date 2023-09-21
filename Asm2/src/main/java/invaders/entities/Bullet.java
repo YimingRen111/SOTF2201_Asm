@@ -5,6 +5,8 @@ import invaders.GameObject;
 
 import invaders.logic.Strategies.BulletStrategy;
 
+import invaders.physics.BoxCollider;
+import invaders.physics.Collider;
 import invaders.physics.Vector2D;
 import invaders.rendering.Renderable;
 import javafx.scene.image.Image;
@@ -22,6 +24,12 @@ public class Bullet extends Entity implements Renderable, GameObject {
     private Image image;
     private final double width = 5;
     private final double height = 10;
+    private BoxCollider collider;
+
+    @Override
+    public Collider getCollider() {
+        return collider;
+    }
 
     @Override
     public void start() {
@@ -40,6 +48,7 @@ public class Bullet extends Entity implements Renderable, GameObject {
         this.direction = direction;
         this.strategy = strategy;
         this.image = new Image(new File("src/main/resources/bullet.png").toURI().toString());
+        this.collider = new BoxCollider(width, height, position);
     }
 
     @Override

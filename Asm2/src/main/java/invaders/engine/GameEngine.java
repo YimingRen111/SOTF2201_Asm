@@ -63,6 +63,7 @@ public class GameEngine {
 		for (Bullet bullet : bullets) {
 			bullet.up();
 		}
+		handleCollisions();
 		// ensure that renderable foreground objects don't go off-screen
 		for(Renderable ro: renderables) {
 			if (!ro.getLayer().equals(Renderable.Layer.FOREGROUND)) {
@@ -145,6 +146,30 @@ public class GameEngine {
 
 	public Player getPlayer() {
 		return player;
+	}
+
+	private void handleCollisions() {
+		List<Bullet> bulletsToRemove = new ArrayList<>();
+		List<Enemy> enemiesToRemove = new ArrayList<>();
+
+		for (Bullet bullet : bullets) {
+			for (Enemy enemy : enemies) {
+				if (bullet.getCollider().isColliding(enemy.getCollider())) {
+					bulletsToRemove.add(bullet);
+					enemiesToRemove.add(enemy);
+					bullet.markForDelete();
+					enemy.markForDelete();
+				}
+			}
+		}
+
+		bullets.removeAll(bulletsToRemove);
+		gameobjects.removeAll(bulletsToRemove);
+		renderables.removeAll(bulletsToRemove);
+
+		enemies.removeAll(enemiesToRemove);
+		gameobjects.removeAll(enemiesToRemove);
+		renderables.removeAll(enemiesToRemove);
 	}
 
 }
