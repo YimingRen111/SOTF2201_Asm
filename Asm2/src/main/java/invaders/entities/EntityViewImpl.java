@@ -1,6 +1,8 @@
 package invaders.entities;
 
 import invaders.ConfigReader;
+import invaders.entities.Builder.Bunker;
+import invaders.entities.Builder.Enemy;
 import invaders.physics.Vector2D;
 import invaders.rendering.Renderable;
 import javafx.scene.Node;

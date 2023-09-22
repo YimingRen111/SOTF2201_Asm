@@ -1,8 +1,8 @@
 package invaders;
 
-import invaders.entities.Bullet;
-import invaders.entities.Bunker;
-import invaders.entities.Enemy;
+import invaders.entities.Builder.Bunker;
+import invaders.entities.Builder.Enemy;
+import invaders.entities.Builder.EnemyBuilder;
 import invaders.entities.Player;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -62,6 +62,22 @@ public class ConfigReader {
 		return new Player(colour, speed, lives, posX, posY, getGameWidth());
 	}
 
+//	public List<Bunker> getBunkers() {
+//		JSONArray bunkersArray = (JSONArray) configData.get("Bunkers");
+//		List<Bunker> bunkersList = new ArrayList<>();
+//		for (Object bunkerObj : bunkersArray) {
+//			JSONObject bunkerConfig = (JSONObject) bunkerObj;
+//			JSONObject position = (JSONObject) bunkerConfig.get("position");
+//			int posX = ((Long) position.get("x")).intValue();
+//			int posY = ((Long) position.get("y")).intValue();
+//			JSONObject size = (JSONObject) bunkerConfig.get("size");
+//			int width = ((Long) size.get("x")).intValue();
+//			int height = ((Long) size.get("y")).intValue();
+//			bunkersList.add(new Bunker(posX, posY, width, height));
+//		}
+//		return bunkersList;
+//	}
+
 	public List<Bunker> getBunkers() {
 		JSONArray bunkersArray = (JSONArray) configData.get("Bunkers");
 		List<Bunker> bunkersList = new ArrayList<>();
@@ -78,6 +94,20 @@ public class ConfigReader {
 		return bunkersList;
 	}
 
+//	public List<Enemy> getEnemies() {
+//		JSONArray enemiesArray = (JSONArray) configData.get("Enemies");
+//		List<Enemy> enemiesList = new ArrayList<>();
+//		for (Object enemyObj : enemiesArray) {
+//			JSONObject enemyConfig = (JSONObject) enemyObj;
+//			JSONObject position = (JSONObject) enemyConfig.get("position");
+//			int posX = ((Long) position.get("x")).intValue();
+//			int posY = ((Long) position.get("y")).intValue();
+//			String projectileStrategy = (String) enemyConfig.get("projectile");
+//			enemiesList.add(new Enemy(posX, posY, projectileStrategy));
+//		}
+//		return enemiesList;
+//	}
+
 	public List<Enemy> getEnemies() {
 		JSONArray enemiesArray = (JSONArray) configData.get("Enemies");
 		List<Enemy> enemiesList = new ArrayList<>();
@@ -86,9 +116,15 @@ public class ConfigReader {
 			JSONObject position = (JSONObject) enemyConfig.get("position");
 			int posX = ((Long) position.get("x")).intValue();
 			int posY = ((Long) position.get("y")).intValue();
-			String projectileStrategy = (String) enemyConfig.get("projectile");
-			enemiesList.add(new Enemy(posX, posY, projectileStrategy));
+
+			Enemy enemy = new EnemyBuilder()
+					.setPosX(posX)
+					.setPosY(posY)
+					.setProjectileStrategy((String) enemyConfig.get("projectile"))
+					.build();
+			enemiesList.add(enemy);
 		}
 		return enemiesList;
 	}
+
 }

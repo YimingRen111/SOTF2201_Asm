@@ -1,8 +1,9 @@
-package invaders.entities;
+package invaders.entities.Factory;
 
 import com.sun.javafx.scene.traversal.Direction;
 import invaders.GameObject;
 
+import invaders.entities.Entity;
 import invaders.logic.Strategies.BulletStrategy;
 
 import invaders.physics.BoxCollider;

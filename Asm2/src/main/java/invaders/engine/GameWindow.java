@@ -3,7 +3,6 @@ package invaders.engine;
 import java.util.List;
 import java.util.ArrayList;
 
-import invaders.entities.Bullet;
 import invaders.entities.EntityViewImpl;
 import invaders.entities.SpaceBackground;
 import javafx.util.Duration;

@@ -1,4 +1,4 @@
-package invaders.entities;
+package invaders.entities.Builder;
 
 import invaders.GameObject;
 import invaders.logic.Damagable;

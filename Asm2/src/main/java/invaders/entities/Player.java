@@ -2,7 +2,7 @@ package invaders.entities;
 
 import invaders.ConfigReader;
 import invaders.GameObject;
-import invaders.engine.GameEngine;
+import invaders.entities.Factory.Bullet;
 import invaders.entities.Factory.BulletFactory;
 import invaders.logic.Damagable;
 import invaders.physics.Collider;

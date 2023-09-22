@@ -1,6 +1,5 @@
 package invaders.entities.Factory;
 
-import invaders.entities.Bullet;
 import invaders.logic.Strategies.FastStraightBullet;
 import invaders.logic.Strategies.SlowStraightBullet;
 import invaders.physics.Vector2D;

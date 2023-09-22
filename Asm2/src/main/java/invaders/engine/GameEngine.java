@@ -2,13 +2,13 @@ package invaders.engine;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import invaders.ConfigReader;
 import invaders.GameObject;
 import invaders.entities.*;
-import invaders.physics.Moveable;
-import invaders.physics.Vector2D;
+import invaders.entities.Builder.Bunker;
+import invaders.entities.Builder.Enemy;
+import invaders.entities.Factory.Bullet;
 import invaders.rendering.Renderable;
 
 /**

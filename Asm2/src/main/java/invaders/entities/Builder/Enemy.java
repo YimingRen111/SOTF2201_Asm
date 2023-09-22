@@ -1,6 +1,8 @@
-package invaders.entities;
+package invaders.entities.Builder;
 
 import invaders.GameObject;
+import invaders.entities.Factory.Bullet;
+import invaders.entities.Entity;
 import invaders.entities.Factory.BulletFactory;
 import invaders.physics.BoxCollider;
 import invaders.physics.Collider;
@@ -31,7 +33,7 @@ public class Enemy extends Entity implements GameObject, Moveable, Renderable {
     private static final double DOWN_AMOUNT = 4; // When reach the edge, move down
 
 
-    public Enemy(int posX, int posY, String projectileStrategy) {
+    public Enemy(double posX, double posY, String projectileStrategy) {
         this.posX = posX;
         this.posY = posY;
         this.image = new Image(new File("src/main/resources/enemy.png").toURI().toString());
