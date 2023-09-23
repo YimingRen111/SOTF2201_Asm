@@ -4,6 +4,7 @@ import invaders.GameObject;
 import invaders.entities.Factory.Bullet;
 import invaders.entities.Entity;
 import invaders.entities.Factory.BulletFactory;
+import invaders.logic.Damagable;
 import invaders.physics.BoxCollider;
 import invaders.physics.Collider;
 import invaders.physics.Moveable;
@@ -16,7 +17,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Enemy extends Entity implements GameObject, Moveable, Renderable {
+public class Enemy extends Entity implements GameObject, Moveable, Renderable, Damagable {
     private double posX;
     private double posY;
     private Vector2D position;
@@ -124,5 +125,20 @@ public class Enemy extends Entity implements GameObject, Moveable, Renderable {
         } else {
             left();
         }
+    }
+
+    @Override
+    public void takeDamage(double amount) {
+
+    }
+
+    @Override
+    public double getHealth() {
+        return 0;
+    }
+
+    @Override
+    public boolean isAlive() {
+        return false;
     }
 }

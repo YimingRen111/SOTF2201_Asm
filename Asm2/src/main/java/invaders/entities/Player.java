@@ -97,12 +97,7 @@ public class Player extends Entity implements GameObject, Moveable, Damagable, R
         double bulletStartX = posX + (width / 2); // Center of the player
         double bulletStartY = posY; // Top of the player
         Vector2D bulletPosition = new Vector2D(bulletStartX, bulletStartY);
-
-        if (bullet == null || bullet.isMarkedForDelete()) {
-            bullet = BulletFactory.createBullet("slow_straight", bulletPosition, Bullet.Direction.UP, Bullet.Shooter.PLAYER);
-            return bullet;
-        }
-        return null; // if player can't shoot, then return null.
+        return BulletFactory.createBullet("slow_straight", bulletPosition, Bullet.Direction.UP, Bullet.Shooter.PLAYER);
     }
 
 

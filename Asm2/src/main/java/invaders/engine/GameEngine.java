@@ -79,9 +79,7 @@ public class GameEngine {
 	 */
 	public void update(){
 		List<List<Enemy>> rowsToRemove = new ArrayList<>();
-
 		handleCollisions();
-
 		movePlayer();
 		moveBullets();
 
@@ -120,7 +118,7 @@ public class GameEngine {
 					enemy.changeDirection();
 					enemy.down();
 				}
-				directionChanged = true;
+				this.directionChanged = true;
 			}
 
 			if (row.isEmpty()) {
@@ -149,9 +147,6 @@ public class GameEngine {
 		for(GameObject go: gameobjects){
 			go.update();
 		}
-
-		handleCollisions();
-
 
 		// ensure that renderable foreground objects don't go off-screen
 //		for(Renderable ro: renderables) {
@@ -234,16 +229,15 @@ public class GameEngine {
 	}
 
 	private void moveBullets() {
-		if(shoot){
+		if (shoot && playerBullets.isEmpty()) { // Ensure only one bullet on screen
 			Bullet bullet = player.shoot();
-			if (bullet != null) {  // Check if bullet is not null
+			if (bullet != null) {
 				playerBullets.add(bullet);
 				gameobjects.add(bullet);
-				renderables.add(bullet);  // Add bullet to renderables
+				renderables.add(bullet);
 			}
 			shoot = false;
 		}
-
 	}
 
 	public Player getPlayer() {
@@ -253,8 +247,9 @@ public class GameEngine {
 	private void handleCollisions() {
 		List<Bullet> bulletsToRemove = new ArrayList<>();
 		List<Enemy> enemiesToRemove = new ArrayList<>();
+		List<Bunker> bunkersToRemove = new ArrayList<>();
 
-		// check if enemy was hit by playerBullets
+		// check if enemy is hit by playerBullets
 		for (Bullet bullet : playerBullets) {
 			for (Enemy enemy : enemies) {
 				if (bullet.getCollider().isColliding(enemy.getCollider())) {
@@ -266,11 +261,21 @@ public class GameEngine {
 			}
 		}
 
-		// Check if player was hit by enemyBullets
+		// Check if player is hit by enemyBullets
 		for (Bullet bullet : enemyBullets) {
 			if (bullet.getCollider().isColliding(player.getCollider())) {
 				bulletsToRemove.add(bullet);
 				bullet.markForDelete();
+			}
+		}
+
+		// Check if bunker is hit
+		checkBulletBunkerCollisions();
+
+		// Check bunkers that should be removed
+		for (Bunker bunker : bunkers) {
+			if (bunker.shouldBeRemoved()) {
+				bunkersToRemove.add(bunker);
 			}
 		}
 
@@ -281,6 +286,38 @@ public class GameEngine {
 		enemies.removeAll(enemiesToRemove);
 		gameobjects.removeAll(enemiesToRemove);
 		renderables.removeAll(enemiesToRemove);
+
+		bunkers.removeAll(bunkersToRemove);
+		gameobjects.removeAll(bunkersToRemove);
+		renderables.removeAll(bunkersToRemove);
 	}
 
+	private void checkBulletBunkerCollisions() {
+		List<Bullet> bulletsToRemove = new ArrayList<>();
+		for (Bullet bullet : playerBullets) {
+			for (Bunker bunker : bunkers) {
+				if (bunker.isColliding(bullet)) {
+					bunker.hit();
+					bulletsToRemove.add(bullet);
+					bullet.markForDelete();
+				}
+			}
+		}
+
+		for (Bullet bullet : enemyBullets) {
+			for (Bunker bunker : bunkers) {
+				if (bunker.isColliding(bullet)) {
+					bunker.hit();
+					bulletsToRemove.add(bullet);
+					bullet.markForDelete();
+				}
+			}
+		}
+
+		// remove the bullet shoot on bunker
+		playerBullets.removeAll(bulletsToRemove);
+		enemyBullets.removeAll(bulletsToRemove);
+		gameobjects.removeAll(bulletsToRemove);
+		renderables.removeAll(bulletsToRemove);
+	}
 }

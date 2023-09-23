@@ -1,57 +1,55 @@
 package invaders.entities.Builder;
 
 import invaders.GameObject;
+import invaders.entities.Entity;
+import invaders.entities.Factory.Bullet;
+import invaders.entities.State.BunkerState;
+import invaders.entities.State.GreenState;
 import invaders.logic.Damagable;
+import invaders.physics.BoxCollider;
 import invaders.physics.Collider;
 import invaders.physics.Vector2D;
 import invaders.rendering.Renderable;
 import javafx.scene.image.Image;
 
-import java.io.File;
+// Bunker.java
+public class Bunker extends Entity implements GameObject, Damagable, Renderable {
 
-public class Bunker implements GameObject, Damagable, Renderable {
-    private int posX;
-    private int posY;
-    private int width;
-    private int height;
-    private Image image = new Image(new File("src/main/resources/bunker.png").toURI().toString());
+    private double posX;
+    private double posY;
+    private double width;
+    private double height;
+    private BunkerState state;
+    private BoxCollider collider;
 
-    public Bunker(int posX, int posY, int width, int height) {
+    public Bunker(double posX, double posY, double width, double height) {
         this.posX = posX;
         this.posY = posY;
         this.width = width;
         this.height = height;
+        this.state = new GreenState(this, "src/main/resources/bunker_green.png");
+        this.collider = new BoxCollider(width, height, new Vector2D(posX,posY));
     }
 
-
-    @Override
-    public Image getImage() {
-        return this.image;
+    public void hit() {
+        state.hit();
     }
 
-    @Override
-    public double getWidth() {
-        return this.image.getWidth();
+    public void setState(BunkerState state) {
+        this.state = state;
     }
 
-    @Override
-    public double getHeight() {
-        return this.image.getHeight();
+    public boolean isColliding(Bullet bullet) {
+        return collider.isColliding(bullet.getCollider());
     }
 
-    @Override
-    public Vector2D getPosition() {
-        return new Vector2D(this.posX, this.posY);
-    }
-
-    @Override
-    public Layer getLayer() {
-        return Layer.FOREGROUND;
+    public boolean shouldBeRemoved() {
+        return state.shouldBeRemoved();
     }
 
     @Override
     public Collider getCollider() {
-        return null;
+        return this.collider;
     }
 
     @Override
@@ -77,5 +75,30 @@ public class Bunker implements GameObject, Damagable, Renderable {
     @Override
     public boolean isAlive() {
         return false;
+    }
+
+    @Override
+    public Image getImage() {
+        return state.getImage();
+    }
+
+    @Override
+    public double getWidth() {
+        return this.width;
+    }
+
+    @Override
+    public double getHeight() {
+        return this.height;
+    }
+
+    @Override
+    public Vector2D getPosition() {
+        return new Vector2D(this.posX, this.posY);
+    }
+
+    @Override
+    public Layer getLayer() {
+        return Layer.FOREGROUND;
     }
 }
