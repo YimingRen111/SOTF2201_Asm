@@ -26,6 +26,7 @@ public class Bullet extends Entity implements Renderable, GameObject {
     private final double width = 60;
     private final double height = 41;
     private BoxCollider collider;
+    private Shooter shooter;
 
     @Override
     public Collider getCollider() {
@@ -42,7 +43,7 @@ public class Bullet extends Entity implements Renderable, GameObject {
 
     }
 
-    public Bullet(Vector2D position, int damage, Direction direction, BulletStrategy strategy) {
+    public Bullet(Vector2D position, int damage, Direction direction, BulletStrategy strategy, Shooter shooter) {
         this.position = position;
         this.speed = speed;
         this.damage = damage;
@@ -50,6 +51,7 @@ public class Bullet extends Entity implements Renderable, GameObject {
         this.strategy = strategy;
         this.image = new Image(new File("src/main/resources/bullet.png").toURI().toString());
         this.collider = new BoxCollider(width, height, position);
+        this.shooter = shooter;
     }
 
     @Override
@@ -89,15 +91,23 @@ public class Bullet extends Entity implements Renderable, GameObject {
     }
 
     public void up() {
-        strategy.move(position);
+        strategy.move(position, direction);
     }
 
     public void down() {
-        strategy.move(position);
+        strategy.move(position, direction);
     }
 
     public enum Direction {
         UP, DOWN
+    }
+
+    public enum Shooter {
+        PLAYER, ENEMY;
+    }
+
+    public Shooter getShooter() {
+        return shooter;
     }
 
 }

@@ -5,6 +5,7 @@ import invaders.GameObject;
 import invaders.entities.Factory.Bullet;
 import invaders.entities.Factory.BulletFactory;
 import invaders.logic.Damagable;
+import invaders.physics.BoxCollider;
 import invaders.physics.Collider;
 import invaders.physics.Moveable;
 import invaders.physics.Vector2D;
@@ -28,14 +29,13 @@ public class Player extends Entity implements GameObject, Moveable, Damagable, R
     private int posY;
     private final Animator anim = null;
     private double health = 100;
-
-    private final double width = 25;
-    private final double height = 30;
+    private final double width = 50;
+    private final double height = 50;
     private double gameWidth;
     private Image image = null;
     private Bullet bullet;
     private List<Bullet> bullets = new ArrayList<>();
-    private boolean bulletInPlay = false;
+    private BoxCollider collider;
 
 
     public Player(String colour, int speed, int lives, int posX, int posY, double gameWidth) {
@@ -46,6 +46,7 @@ public class Player extends Entity implements GameObject, Moveable, Damagable, R
         this.posY = posY;
         this.gameWidth = gameWidth;
         this.image = new Image(new File("src/main/resources/player.png").toURI().toString(), width, height, true, true);
+        this.collider = new BoxCollider(width, height, new Vector2D(posX, posY));
     }
 
     @Override
@@ -84,8 +85,8 @@ public class Player extends Entity implements GameObject, Moveable, Damagable, R
     @Override
     public void right() {
         this.posX += 1;
-        if (posX + 1.5*width > gameWidth) {
-            posX = (int) (gameWidth - 1.5*width);
+        if (posX + width > gameWidth) {
+            posX = (int) (gameWidth - width);
         }
     }
 
@@ -96,10 +97,10 @@ public class Player extends Entity implements GameObject, Moveable, Damagable, R
         Vector2D bulletPosition = new Vector2D(bulletStartX, bulletStartY);
 
         if (bullet == null || bullet.isMarkedForDelete()) {
-            bullet = BulletFactory.createBullet("slow_straight", bulletPosition, Bullet.Direction.UP);
+            bullet = BulletFactory.createBullet("slow_straight", bulletPosition, Bullet.Direction.UP, Bullet.Shooter.PLAYER);
             return bullet;
         }
-        return null; // if can't shoot, then return null.
+        return null; // if player can't shoot, then return null.
     }
 
 
@@ -136,7 +137,9 @@ public class Player extends Entity implements GameObject, Moveable, Damagable, R
 
     @Override
     public Collider getCollider() {
-        return null;
+        collider.getPosition().setX(posX);
+        collider.getPosition().setY(posY);
+        return collider;
     }
 
     @Override

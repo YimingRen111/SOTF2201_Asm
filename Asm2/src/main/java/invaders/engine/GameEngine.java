@@ -21,7 +21,8 @@ public class GameEngine {
 	private Player player;
 	private List<Enemy> enemies;
 	private List<Bunker> bunkers;
-	private List<Bullet> bullets = new ArrayList<>();
+	private List<Bullet> playerBullets = new ArrayList<>();
+	private List<Bullet> enemyBullets = new ArrayList<>();
 
 	private boolean left;
 	private boolean right;
@@ -79,11 +80,16 @@ public class GameEngine {
 	public void update(){
 		List<List<Enemy>> rowsToRemove = new ArrayList<>();
 
+		handleCollisions();
+
 		movePlayer();
 		moveBullets();
 
-		for (Bullet bullet : bullets) {
+		for (Bullet bullet : playerBullets) {
 			bullet.up();
+		}
+		for (Bullet bullet : enemyBullets) {
+			bullet.down();
 		}
 
 		for (List<Enemy> row : enemyRows) {
@@ -128,6 +134,18 @@ public class GameEngine {
 			enemy.update();
 		}
 
+		// Enemy shoot, at most 3 projectile
+		for (Enemy enemy : enemies) {
+			if (Math.random() < 0.005 && enemyBullets.size() < 3) { // the chance to shoot
+				Bullet bullet = enemy.shoot();
+				if (bullet != null) {
+					enemyBullets.add(bullet);
+					gameobjects.add(bullet);
+					renderables.add(bullet);
+				}
+			}
+		}
+
 		for(GameObject go: gameobjects){
 			go.update();
 		}
@@ -136,40 +154,48 @@ public class GameEngine {
 
 
 		// ensure that renderable foreground objects don't go off-screen
-		for(Renderable ro: renderables) {
-			if (!ro.getLayer().equals(Renderable.Layer.FOREGROUND)) {
-				continue;
-			}
-			if (ro.getPosition().getX() + ro.getWidth() >= 600) {
-				ro.getPosition().setX(639 - ro.getWidth());
-			}
+//		for(Renderable ro: renderables) {
+//			if (!ro.getLayer().equals(Renderable.Layer.FOREGROUND)) {
+//				continue;
+//			}
+//			if (ro.getPosition().getX() + ro.getWidth() >= 600) {
+//				ro.getPosition().setX(639 - ro.getWidth());
+//			}
+//
+//			if (ro.getPosition().getX() <= 0) {
+//				ro.getPosition().setX(1);
+//			}
+//
+//			if (ro.getPosition().getY() + ro.getHeight() > 800) {
+//				ro.getPosition().setY(399 - ro.getHeight());
+//			}
+//
+//			if (ro.getPosition().getY() <= 0) {
+//				ro.getPosition().setY(1);
+//			}
+//		}
 
-			if (ro.getPosition().getX() <= 0) {
-				ro.getPosition().setX(1);
-			}
 
-			if (ro.getPosition().getY() + ro.getHeight() > 800) {
-				ro.getPosition().setY(399 - ro.getHeight());
-			}
-
-			if (ro.getPosition().getY() <= 0) {
-				ro.getPosition().setY(1);
-			}
-		}
-
-
-		// Check bullets for out of bounds
+		// Check playerBullets for out of bounds
 		List<Bullet> bulletsToRemove = new ArrayList<>();
-		for (Bullet bullet : bullets) {
+		removeOutsideBullets(bulletsToRemove, playerBullets);
+		directionChanged = false;
+
+		// Check enemyBullets for out of bounds
+		removeOutsideBullets(bulletsToRemove, enemyBullets);
+
+	}
+
+	public void removeOutsideBullets(List<Bullet> bulletsToRemove, List<Bullet> playerBullets) {
+		for (Bullet bullet : playerBullets) {
 			if (bullet.getPosition().getY() <= 5 || bullet.getPosition().getY() > 800) {
 				bulletsToRemove.add(bullet);
 				bullet.markForDelete();
 			}
 		}
-		bullets.removeAll(bulletsToRemove);
+		playerBullets.removeAll(bulletsToRemove);
 		gameobjects.removeAll(bulletsToRemove);
 		renderables.removeAll(bulletsToRemove);
-		directionChanged = false;
 	}
 
 	public List<Renderable> getRenderables(){
@@ -211,7 +237,7 @@ public class GameEngine {
 		if(shoot){
 			Bullet bullet = player.shoot();
 			if (bullet != null) {  // Check if bullet is not null
-				bullets.add(bullet);
+				playerBullets.add(bullet);
 				gameobjects.add(bullet);
 				renderables.add(bullet);  // Add bullet to renderables
 			}
@@ -228,7 +254,8 @@ public class GameEngine {
 		List<Bullet> bulletsToRemove = new ArrayList<>();
 		List<Enemy> enemiesToRemove = new ArrayList<>();
 
-		for (Bullet bullet : bullets) {
+		// check if enemy was hit by playerBullets
+		for (Bullet bullet : playerBullets) {
 			for (Enemy enemy : enemies) {
 				if (bullet.getCollider().isColliding(enemy.getCollider())) {
 					bulletsToRemove.add(bullet);
@@ -239,7 +266,15 @@ public class GameEngine {
 			}
 		}
 
-		bullets.removeAll(bulletsToRemove);
+		// Check if player was hit by enemyBullets
+		for (Bullet bullet : enemyBullets) {
+			if (bullet.getCollider().isColliding(player.getCollider())) {
+				bulletsToRemove.add(bullet);
+				bullet.markForDelete();
+			}
+		}
+
+		playerBullets.removeAll(bulletsToRemove);
 		gameobjects.removeAll(bulletsToRemove);
 		renderables.removeAll(bulletsToRemove);
 
