@@ -4,6 +4,8 @@ public class EnemyBuilder {
     private double posX;
     private double posY;
     private String projectileStrategy;
+    private double width;
+    private double height;
 
     public EnemyBuilder setPosX(double posX) {
         this.posX = posX;
@@ -20,7 +22,18 @@ public class EnemyBuilder {
         return this;
     }
 
+    public EnemyBuilder setWidth(double width) {
+        this.width = width;
+        return this;
+    }
+
+    public EnemyBuilder setHeight(double height) {
+        this.height = height;
+        return this;
+    }
+
+
     public Enemy build() {
-        return new Enemy(posX, posY, projectileStrategy);
+        return new Enemy(posX, posY, projectileStrategy, width, height);
     }
 }

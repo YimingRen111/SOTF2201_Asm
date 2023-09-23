@@ -25,19 +25,21 @@ public class Enemy extends Entity implements GameObject, Moveable, Renderable {
     private Image image;
     private List<Bullet> bullets = new ArrayList<>();
     private BoxCollider collider;
-    private final double width = 50;
-    private final double height = 37;
+    private final double width;
+    private final double height;
 
     private boolean moveRight;
     private static final double MOVE_AMOUNT = 0.1; // distance for each movement
     private static final double DOWN_AMOUNT = 4; // When reach the edge, move down
 
 
-    public Enemy(double posX, double posY, String projectileStrategy) {
+    public Enemy(double posX, double posY, String projectileStrategy, double width, double height) {
         this.posX = posX;
         this.posY = posY;
         this.image = new Image(new File("src/main/resources/enemy.png").toURI().toString());
         this.Strategy = projectileStrategy;
+        this.width = width;
+        this.height = height;
         this.collider = new BoxCollider(width, height, new Vector2D(posX,posY));
         this.moveRight = true;
         this.position = new Vector2D(posX,posY);
@@ -45,7 +47,7 @@ public class Enemy extends Entity implements GameObject, Moveable, Renderable {
 
     public Bullet shoot() {
         Vector2D bulletPosition = new Vector2D(posX, posY + this.getHeight());
-        Bullet bullet = BulletFactory.createBullet("fast_straight", bulletPosition, Bullet.Direction.DOWN, Bullet.Shooter.ENEMY);
+        Bullet bullet = BulletFactory.createBullet(this.Strategy, bulletPosition, Bullet.Direction.DOWN, Bullet.Shooter.ENEMY);
         bullets.add(bullet);
         return bullet;
     }

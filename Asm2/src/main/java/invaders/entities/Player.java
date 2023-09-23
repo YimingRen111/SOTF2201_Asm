@@ -29,22 +29,24 @@ public class Player extends Entity implements GameObject, Moveable, Damagable, R
     private int posY;
     private final Animator anim = null;
     private double health = 100;
-    private final double width = 50;
-    private final double height = 50;
+    private final double width;
+    private final double height;
     private double gameWidth;
-    private Image image = null;
+    private Image image;
     private Bullet bullet;
     private List<Bullet> bullets = new ArrayList<>();
     private BoxCollider collider;
 
 
-    public Player(String colour, int speed, int lives, int posX, int posY, double gameWidth) {
+    public Player(String colour, int speed, int lives, int posX, int posY, double gameWidth, double width, double height) {
         this.colour = colour;
         this.speed = speed;
         this.lives = lives;
         this.posX = posX;
         this.posY = posY;
         this.gameWidth = gameWidth;
+        this.width = width;
+        this.height = height;
         this.image = new Image(new File("src/main/resources/player.png").toURI().toString(), width, height, true, true);
         this.collider = new BoxCollider(width, height, new Vector2D(posX, posY));
     }

@@ -9,6 +9,8 @@
     "colour": "green",
     "speed": 1,
     "lives": 3,
+    "width": 50,
+    "height": 50,
     "position": {
       "x": 300,
       "y": 750
@@ -16,6 +18,8 @@
   },
   "Bunkers": [
     {
+      "width": 74,
+      "height": 54,
       "position": {
         "x": 75,
         "y": 600
@@ -26,6 +30,8 @@
       }
     },
     {
+      "width": 74,
+      "height": 54,
       "position": {
         "x": 275,
         "y": 600
@@ -36,6 +42,8 @@
       }
     },
     {
+      "width": 74,
+      "height": 54,
       "position": {
         "x": 475,
         "y": 600
@@ -48,6 +56,8 @@
   ],
   "Enemies": [
     {
+      "width": 44,
+      "height": 33,
       "position": {
         "x": 50,
         "y": 100
@@ -55,6 +65,8 @@
       "projectile": "fast_straight"
     },
     {
+      "width": 44,
+      "height": 33,
       "position": {
         "x": 100,
         "y": 100
@@ -62,6 +74,8 @@
       "projectile": "slow_straight"
     },
     {
+      "width": 44,
+      "height": 33,
       "position": {
         "x": 150,
         "y": 100
@@ -69,6 +83,8 @@
       "projectile": "slow_straight"
     },
     {
+      "width": 44,
+      "height": 33,
       "position": {
         "x": 200,
         "y": 100
@@ -76,6 +92,8 @@
       "projectile": "fast_straight"
     },
     {
+      "width": 44,
+      "height": 33,
       "position": {
         "x": 250,
         "y": 100
@@ -83,6 +101,8 @@
       "projectile": "slow_straight"
     },
     {
+      "width": 44,
+      "height": 33,
       "position": {
         "x": 300,
         "y": 100
@@ -90,6 +110,8 @@
       "projectile": "slow_straight"
     },
     {
+      "width": 44,
+      "height": 33,
       "position": {
         "x": 350,
         "y": 100
@@ -97,6 +119,8 @@
       "projectile": "slow_straight"
     },
     {
+      "width": 44,
+      "height": 33,
       "position": {
         "x": 400,
         "y": 100
@@ -104,6 +128,8 @@
       "projectile": "fast_straight"
     },
     {
+      "width": 44,
+      "height": 33,
       "position": {
         "x": 450,
         "y": 100
@@ -111,6 +137,8 @@
       "projectile": "slow_straight"
     },
     {
+      "width": 44,
+      "height": 33,
       "position": {
         "x": 100,
         "y": 150
@@ -118,6 +146,8 @@
       "projectile": "fast_straight"
     },
     {
+      "width": 44,
+      "height": 33,
       "position": {
         "x": 150,
         "y": 150
@@ -125,6 +155,8 @@
       "projectile": "slow_straight"
     },
     {
+      "width": 44,
+      "height": 33,
       "position": {
         "x": 200,
         "y": 150
@@ -132,6 +164,8 @@
       "projectile": "slow_straight"
     },
     {
+      "width": 44,
+      "height": 33,
       "position": {
         "x": 250,
         "y": 150
@@ -139,6 +173,8 @@
       "projectile": "fast_straight"
     },
     {
+      "width": 44,
+      "height": 33,
       "position": {
         "x": 300,
         "y": 150
@@ -146,6 +182,8 @@
       "projectile": "slow_straight"
     },
     {
+      "width": 44,
+      "height": 33,
       "position": {
         "x": 350,
         "y": 150
@@ -153,6 +191,8 @@
       "projectile": "slow_straight"
     },
     {
+      "width": 44,
+      "height": 33,
       "position": {
         "x": 400,
         "y": 150
@@ -160,6 +200,8 @@
       "projectile": "slow_straight"
     },
     {
+      "width": 44,
+      "height": 33,
       "position": {
         "x": 450,
         "y": 150
@@ -167,6 +209,8 @@
       "projectile": "fast_straight"
     },
     {
+      "width": 44,
+      "height": 33,
       "position": {
         "x": 500,
         "y": 150
@@ -174,6 +218,8 @@
       "projectile": "slow_straight"
     },
     {
+      "width": 44,
+      "height": 33,
       "position": {
         "x": 150,
         "y": 200
@@ -181,6 +227,8 @@
       "projectile": "fast_straight"
     },
     {
+      "width": 44,
+      "height": 33,
       "position": {
         "x": 200,
         "y": 200
@@ -188,6 +236,8 @@
       "projectile": "slow_straight"
     },
     {
+      "width": 44,
+      "height": 33,
       "position": {
         "x": 250,
         "y": 200
@@ -195,6 +245,8 @@
       "projectile": "slow_straight"
     },
     {
+      "width": 44,
+      "height": 33,
       "position": {
         "x": 300,
         "y": 200
@@ -202,6 +254,8 @@
       "projectile": "fast_straight"
     },
     {
+      "width": 44,
+      "height": 33,
       "position": {
         "x": 350,
         "y": 200
@@ -209,6 +263,8 @@
       "projectile": "slow_straight"
     },
     {
+      "width": 44,
+      "height": 33,
       "position": {
         "x": 400,
         "y": 200
@@ -216,6 +272,8 @@
       "projectile": "slow_straight"
     },
     {
+      "width": 44,
+      "height": 33,
       "position": {
         "x": 450,
         "y": 200
@@ -223,6 +281,8 @@
       "projectile": "slow_straight"
     },
     {
+      "width": 44,
+      "height": 33,
       "position": {
         "x": 500,
         "y": 200
@@ -230,6 +290,8 @@
       "projectile": "fast_straight"
     },
     {
+      "width": 44,
+      "height": 33,
       "position": {
         "x": 550,
         "y": 200

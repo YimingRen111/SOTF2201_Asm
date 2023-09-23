@@ -23,8 +23,8 @@ public class Bullet extends Entity implements Renderable, GameObject {
     private boolean isAlive = true;
     private Direction direction;
     private Image image;
-    private final double width = 60;
-    private final double height = 41;
+    private final double width = 22;
+    private final double height = 36;
     private BoxCollider collider;
     private Shooter shooter;
 
@@ -49,7 +49,11 @@ public class Bullet extends Entity implements Renderable, GameObject {
         this.damage = damage;
         this.direction = direction;
         this.strategy = strategy;
-        this.image = new Image(new File("src/main/resources/bullet.png").toURI().toString());
+        if (shooter == Shooter.PLAYER) {
+            this.image = new Image(new File("src/main/resources/playerBullet.png").toURI().toString());
+        } else if (shooter == Shooter.ENEMY) {
+            this.image = new Image(new File("src/main/resources/enemyBullet.png").toURI().toString());
+        }
         this.collider = new BoxCollider(width, height, position);
         this.shooter = shooter;
     }
@@ -105,9 +109,4 @@ public class Bullet extends Entity implements Renderable, GameObject {
     public enum Shooter {
         PLAYER, ENEMY;
     }
-
-    public Shooter getShooter() {
-        return shooter;
-    }
-
 }
