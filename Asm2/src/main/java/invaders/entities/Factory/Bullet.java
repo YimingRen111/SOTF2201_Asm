@@ -27,6 +27,7 @@ public class Bullet extends Entity implements Renderable, GameObject {
     private final double height = 36;
     private BoxCollider collider;
     private Shooter shooter;
+    private boolean hasHitPlayer = false;
 
     @Override
     public Collider getCollider() {
@@ -109,4 +110,13 @@ public class Bullet extends Entity implements Renderable, GameObject {
     public enum Shooter {
         PLAYER, ENEMY;
     }
+
+    public void hitPlayer() {
+        this.hasHitPlayer = true;
+    }
+
+    public boolean hasHitPlayer() {
+        return this.hasHitPlayer;
+    }
+
 }

@@ -263,14 +263,20 @@ public class GameEngine {
 
 		// Check if player is hit by enemyBullets
 		for (Bullet bullet : enemyBullets) {
-			if (bullet.getCollider().isColliding(player.getCollider())) {
-				bulletsToRemove.add(bullet);
+			if (!bullet.hasHitPlayer() && bullet.getCollider().isColliding(player.getCollider())) {
+				player.reduceLives();
+				bullet.hitPlayer();  // Mark the bullet as having hit the player
+				bulletsToRemove.add(bullet);  // Mark the bullet for removal
 				bullet.markForDelete();
+				break;  // Exit the loop once the player is hit
 			}
 		}
 
 		// Check if bunker is hit
 		checkBulletBunkerCollisions();
+
+		// Check if projectiles are collided
+		handleBulletBulletCollisions();
 
 		// Check bunkers that should be removed
 		for (Bunker bunker : bunkers) {
@@ -320,4 +326,23 @@ public class GameEngine {
 		gameobjects.removeAll(bulletsToRemove);
 		renderables.removeAll(bulletsToRemove);
 	}
+
+	private void handleBulletBulletCollisions() {
+		List<Bullet> bulletsToRemove = new ArrayList<>();
+		for (Bullet playerBullet : playerBullets) {
+			for (Bullet enemyBullet : enemyBullets) {
+				if (playerBullet.getCollider().isColliding(enemyBullet.getCollider())) {
+					bulletsToRemove.add(playerBullet);
+					bulletsToRemove.add(enemyBullet);
+					playerBullet.markForDelete();
+					enemyBullet.markForDelete();
+				}
+			}
+		}
+		playerBullets.removeAll(bulletsToRemove);
+		enemyBullets.removeAll(bulletsToRemove);
+		gameobjects.removeAll(bulletsToRemove);
+		renderables.removeAll(bulletsToRemove);
+	}
+
 }

@@ -106,6 +106,15 @@ public class Player extends Entity implements GameObject, Moveable, Damagable, R
         return bullets;
     }
 
+    public void reduceLives(){
+        lives--;
+        System.out.println("Player Lives: "+ lives);
+        if (lives <= 0) {
+            System.out.println("Game Over!");
+            System.exit(0); // if lives <=0 , the game ends.
+        }
+    }
+
     @Override
     public Image getImage() {
         return this.image;
@@ -146,5 +155,8 @@ public class Player extends Entity implements GameObject, Moveable, Damagable, R
 
     @Override
     public void update() {
+
     }
+
+
 }
