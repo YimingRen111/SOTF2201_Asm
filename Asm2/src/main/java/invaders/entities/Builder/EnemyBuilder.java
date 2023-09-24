@@ -3,6 +3,7 @@ package invaders.entities.Builder;
 public class EnemyBuilder {
     private double posX;
     private double posY;
+    private double speed;
     private String projectileStrategy;
     private double width;
     private double height;
@@ -32,8 +33,13 @@ public class EnemyBuilder {
         return this;
     }
 
+    public EnemyBuilder setSpeed(double speed) {
+        this.speed = speed;
+        return this;
+    }
+
 
     public Enemy build() {
-        return new Enemy(posX, posY, projectileStrategy, width, height);
+        return new Enemy(posX, posY, speed, projectileStrategy, width, height);
     }
 }

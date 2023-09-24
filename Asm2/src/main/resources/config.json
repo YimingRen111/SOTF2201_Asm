@@ -7,7 +7,7 @@
   },
   "Player": {
     "colour": "green",
-    "speed": 1,
+    "speed": 2,
     "lives": 5,
     "width": 50,
     "height": 50,
@@ -56,6 +56,7 @@
   ],
   "Enemies": [
     {
+      "speed": 0.1,
       "width": 44,
       "height": 33,
       "position": {
@@ -65,6 +66,7 @@
       "projectile": "fast_straight"
     },
     {
+      "speed": 0.1,
       "width": 44,
       "height": 33,
       "position": {
@@ -74,6 +76,7 @@
       "projectile": "slow_straight"
     },
     {
+      "speed": 0.1,
       "width": 44,
       "height": 33,
       "position": {
@@ -83,6 +86,7 @@
       "projectile": "slow_straight"
     },
     {
+      "speed": 0.1,
       "width": 44,
       "height": 33,
       "position": {
@@ -92,6 +96,7 @@
       "projectile": "fast_straight"
     },
     {
+      "speed": 0.1,
       "width": 44,
       "height": 33,
       "position": {
@@ -101,6 +106,7 @@
       "projectile": "slow_straight"
     },
     {
+      "speed": 0.1,
       "width": 44,
       "height": 33,
       "position": {
@@ -110,6 +116,7 @@
       "projectile": "slow_straight"
     },
     {
+      "speed": 0.1,
       "width": 44,
       "height": 33,
       "position": {
@@ -119,6 +126,7 @@
       "projectile": "slow_straight"
     },
     {
+      "speed": 0.1,
       "width": 44,
       "height": 33,
       "position": {
@@ -128,6 +136,7 @@
       "projectile": "fast_straight"
     },
     {
+      "speed": 0.1,
       "width": 44,
       "height": 33,
       "position": {
@@ -137,6 +146,7 @@
       "projectile": "slow_straight"
     },
     {
+      "speed": 0.1,
       "width": 44,
       "height": 33,
       "position": {
@@ -146,6 +156,7 @@
       "projectile": "fast_straight"
     },
     {
+      "speed": 0.1,
       "width": 44,
       "height": 33,
       "position": {
@@ -155,6 +166,7 @@
       "projectile": "slow_straight"
     },
     {
+      "speed": 0.1,
       "width": 44,
       "height": 33,
       "position": {
@@ -164,6 +176,7 @@
       "projectile": "slow_straight"
     },
     {
+      "speed": 0.1,
       "width": 44,
       "height": 33,
       "position": {
@@ -173,6 +186,7 @@
       "projectile": "fast_straight"
     },
     {
+      "speed": 0.1,
       "width": 44,
       "height": 33,
       "position": {
@@ -182,6 +196,7 @@
       "projectile": "slow_straight"
     },
     {
+      "speed": 0.1,
       "width": 44,
       "height": 33,
       "position": {
@@ -191,6 +206,7 @@
       "projectile": "slow_straight"
     },
     {
+      "speed": 0.1,
       "width": 44,
       "height": 33,
       "position": {
@@ -200,6 +216,7 @@
       "projectile": "slow_straight"
     },
     {
+      "speed": 0.1,
       "width": 44,
       "height": 33,
       "position": {
@@ -209,6 +226,7 @@
       "projectile": "fast_straight"
     },
     {
+      "speed": 0.1,
       "width": 44,
       "height": 33,
       "position": {
@@ -218,6 +236,7 @@
       "projectile": "slow_straight"
     },
     {
+      "speed": 0.1,
       "width": 44,
       "height": 33,
       "position": {
@@ -227,6 +246,7 @@
       "projectile": "fast_straight"
     },
     {
+      "speed": 0.1,
       "width": 44,
       "height": 33,
       "position": {
@@ -236,6 +256,7 @@
       "projectile": "slow_straight"
     },
     {
+      "speed": 0.1,
       "width": 44,
       "height": 33,
       "position": {
@@ -245,6 +266,7 @@
       "projectile": "slow_straight"
     },
     {
+      "speed": 0.1,
       "width": 44,
       "height": 33,
       "position": {
@@ -254,6 +276,7 @@
       "projectile": "fast_straight"
     },
     {
+      "speed": 0.1,
       "width": 44,
       "height": 33,
       "position": {
@@ -263,6 +286,7 @@
       "projectile": "slow_straight"
     },
     {
+      "speed": 0.1,
       "width": 44,
       "height": 33,
       "position": {
@@ -272,6 +296,7 @@
       "projectile": "slow_straight"
     },
     {
+      "speed": 0.1,
       "width": 44,
       "height": 33,
       "position": {
@@ -281,6 +306,7 @@
       "projectile": "slow_straight"
     },
     {
+      "speed": 0.1,
       "width": 44,
       "height": 33,
       "position": {
@@ -290,6 +316,7 @@
       "projectile": "fast_straight"
     },
     {
+      "speed": 0.1,
       "width": 44,
       "height": 33,
       "position": {

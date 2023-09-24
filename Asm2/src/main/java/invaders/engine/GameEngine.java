@@ -132,7 +132,7 @@ public class GameEngine {
 			enemy.update();
 		}
 
-		// Enemy shoot, at most 3 projectile
+//		 Enemy shoot, at most 3 projectile
 		for (Enemy enemy : enemies) {
 			if (Math.random() < 0.005 && enemyBullets.size() < 3) { // the chance to shoot
 				Bullet bullet = enemy.shoot();
@@ -179,6 +179,10 @@ public class GameEngine {
 		// Check enemyBullets for out of bounds
 		removeOutsideBullets(bulletsToRemove, enemyBullets);
 
+		if (enemies.isEmpty()) {
+			System.out.println("Game Over!");
+			System.exit(0);
+		}
 	}
 
 	public void removeOutsideBullets(List<Bullet> bulletsToRemove, List<Bullet> playerBullets) {
@@ -253,6 +257,7 @@ public class GameEngine {
 		for (Bullet bullet : playerBullets) {
 			for (Enemy enemy : enemies) {
 				if (bullet.getCollider().isColliding(enemy.getCollider())) {
+					increaseEnemySpeed();
 					bulletsToRemove.add(bullet);
 					enemiesToRemove.add(enemy);
 					bullet.markForDelete();
@@ -277,6 +282,23 @@ public class GameEngine {
 
 		// Check if projectiles are collided
 		handleBulletBulletCollisions();
+
+		// Check if Enemy collide the bunker
+		for (Enemy enemy : enemies) {
+			for (Bunker bunker : bunkers) {
+				if (enemy.getCollider().isColliding(bunker.getCollider())) {
+					bunkersToRemove.add(bunker);
+				}
+			}
+		}
+
+		// Check if Enemy reach the bottom edge
+		for (Enemy enemy : enemies) {
+			if (enemy.getCollider().isColliding(player.getCollider()) || enemy.getPosition().getY() >= 800) {
+				System.out.println("Game Over!");
+				System.exit(0); // game over
+			}
+		}
 
 		// Check bunkers that should be removed
 		for (Bunker bunker : bunkers) {
@@ -343,6 +365,14 @@ public class GameEngine {
 		enemyBullets.removeAll(bulletsToRemove);
 		gameobjects.removeAll(bulletsToRemove);
 		renderables.removeAll(bulletsToRemove);
+	}
+
+	private void increaseEnemySpeed() {
+		final double speedIncreaseFactor = 1.05;  // speed increase 0.05%
+
+		for (Enemy enemy : enemies) {
+			enemy.setSpeed(enemy.getSpeed() * speedIncreaseFactor);
+		}
 	}
 
 }

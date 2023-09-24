@@ -29,4 +29,5 @@ public class RedState implements BunkerState {
     public boolean shouldBeRemoved() {
         return markedForRemoval;
     }
+
 }

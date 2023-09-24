@@ -90,10 +90,12 @@ public class ConfigReader {
 			JSONObject position = (JSONObject) enemyConfig.get("position");
 			int posX = ((Long) position.get("x")).intValue();
 			int posY = ((Long) position.get("y")).intValue();
+			double speed = (double) enemyConfig.get("speed");
 
 			Enemy enemy = new EnemyBuilder()
 					.setPosX(posX)
 					.setPosY(posY)
+					.setSpeed(speed)
 					.setProjectileStrategy((String) enemyConfig.get("projectile"))
 					.setWidth(width)
 					.setHeight(height)

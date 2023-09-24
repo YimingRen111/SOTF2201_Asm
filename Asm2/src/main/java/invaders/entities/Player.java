@@ -33,8 +33,6 @@ public class Player extends Entity implements GameObject, Moveable, Damagable, R
     private final double height;
     private double gameWidth;
     private Image image;
-    private Bullet bullet;
-    private List<Bullet> bullets = new ArrayList<>();
     private BoxCollider collider;
 
 
@@ -78,7 +76,7 @@ public class Player extends Entity implements GameObject, Moveable, Damagable, R
 
     @Override
     public void left() {
-        this.posX -= 1;
+        this.posX -= speed;
         if (posX < 0) {
             posX = 0;
         }
@@ -86,7 +84,7 @@ public class Player extends Entity implements GameObject, Moveable, Damagable, R
 
     @Override
     public void right() {
-        this.posX += 1;
+        this.posX += speed;
         if (posX + width > gameWidth) {
             posX = (int) (gameWidth - width);
         }
@@ -98,12 +96,6 @@ public class Player extends Entity implements GameObject, Moveable, Damagable, R
         double bulletStartY = posY; // Top of the player
         Vector2D bulletPosition = new Vector2D(bulletStartX, bulletStartY);
         return BulletFactory.createBullet("slow_straight", bulletPosition, Bullet.Direction.UP, Bullet.Shooter.PLAYER);
-    }
-
-
-
-    public List<Bullet> getBullets() {
-        return bullets;
     }
 
     public void reduceLives(){

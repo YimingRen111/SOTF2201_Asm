@@ -30,13 +30,14 @@ public class Enemy extends Entity implements GameObject, Moveable, Renderable, D
     private final double height;
 
     private boolean moveRight;
-    private static final double MOVE_AMOUNT = 0.1; // distance for each movement
-    private static final double DOWN_AMOUNT = 4; // When reach the edge, move down
+    private double MOVE_AMOUNT = 0.1; // distance for each movement
+    private static final double DOWN_AMOUNT = 5; // When reach the edge, move down
 
 
-    public Enemy(double posX, double posY, String projectileStrategy, double width, double height) {
+    public Enemy(double posX, double posY, double speed, String projectileStrategy, double width, double height) {
         this.posX = posX;
         this.posY = posY;
+        this.MOVE_AMOUNT = speed;
         this.image = new Image(new File("src/main/resources/enemy.png").toURI().toString());
         this.Strategy = projectileStrategy;
         this.width = width;
@@ -140,5 +141,13 @@ public class Enemy extends Entity implements GameObject, Moveable, Renderable, D
     @Override
     public boolean isAlive() {
         return false;
+    }
+
+    public void setSpeed(Double newSpeed){
+        this.MOVE_AMOUNT = newSpeed;
+    }
+
+    public double getSpeed(){
+        return this.MOVE_AMOUNT;
     }
 }
